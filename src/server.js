@@ -4,18 +4,14 @@ import session from 'express-session';
 import store from 'session-file-store';
 import path from 'path';
 import jsxRender from './utils/jsxRender';
-import indexRouter from './routes/indexRouter';
-import apiRouter from './routes/apiRouter';
+import renderRouter from './routs/renderRouter';
+// import apiUserRouter from './routs/apiUserRouter';
+// import apiCarRouter from './routs/apiCarRouter';
 
 require('dotenv').config();
 
-const PORT = process.env.SERVER_PORT || 3002;
+const PORT = process.env.SERVER_PORT || 3000;
 const app = express();
-
-app.engine('jsx', jsxRender);
-app.set('view engine', 'jsx');
-app.set('views', path.join(__dirname, 'components'));
-
 const FileStore = store(session);
 
 const sessionConfig = {
@@ -29,6 +25,9 @@ const sessionConfig = {
     httpOnly: true, 				// Серверная установка и удаление куки, по умолчанию true
   },
 };
+app.engine('jsx', jsxRender);
+app.set('view engine', 'jsx');
+app.set('views', path.join(__dirname, 'components'));
 
 app.use(express.static('public'));
 app.use(morgan('dev'));
@@ -36,7 +35,14 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(session(sessionConfig));
 
-app.use('/', indexRouter);
-app.use('/api/v1', apiRouter);
+app.use((req, res, next) => {
+  res.locals.path = req.originalUrl;
+  res.locals.user = req.session.user;
+  next();
+});
+
+app.use('/', renderRouter);
+// app.use('/api/user', apiUserRouter);
+// app.use('/api/car', apiCarRouter);
 
 app.listen(PORT, () => console.log(`App has started on port ${PORT}`));
