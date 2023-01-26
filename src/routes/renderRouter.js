@@ -12,4 +12,7 @@ renderRouter.get('/login', (req, res) => {
 renderRouter.get('/signup', (req, res) => {
   res.render('Layout');
 });
+renderRouter.get('/oneCard', (req, res) => {
+  res.render('Layout');
+});
 export default renderRouter;

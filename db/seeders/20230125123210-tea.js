@@ -15,7 +15,7 @@ module.exports = {
       place: 'India',
       coordinates_x: '123',
       coordinates_y: '123',
-      img: 'img:url',
+      img: 'https://e2.edimdoma.ru/data/ingredients/0000/1200/1200-ed4_wide.jpg?1515760357',
       description: 'tea such shitty tea',
       createdAt: new Date(),
       updatedAt: new Date(),
