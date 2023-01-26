@@ -1,15 +1,17 @@
 import express from 'express';
 import bcrypt from 'bcrypt';
+import { User } from '../../db/models';
 
 const apiUserRouter = express.Router();
 apiUserRouter.post('/signup', async (req, res) => {
   try {
-    const { pass, email, username } = req.body;
-    const hashpass = await bcrypt.hash(pass, 10);
+    console.log(req.body);
+    const { pass, email, name } = req.body;
+    const password = await bcrypt.hash(pass, 10);
     const [user, created] = await User.findOrCreate({
       where: { email },
       defaults: {
-        hashpass, username,
+        password, name,
       },
     });
     if (!created) {
@@ -35,13 +37,14 @@ apiUserRouter.post('/signin', async (req, res) => {
     if (emailOrUserName.includes('@')) {
       user = await User.findOne({ where: { email: emailOrUserName } });
     } else if (!emailOrUserName.includes('@')) {
-      user = await User.findOne({ where: { username: emailOrUserName } });
+      user = await User.findOne({ where: { name: emailOrUserName } });
     }
-    const check = await bcrypt.compare(pass, user.hashpass);
+    const check = await bcrypt.compare(pass, user.password);
     if (check) {
       req.session.user = user;
       return res.sendStatus(200);
     }
+    return res.sendStatus(403);
   } catch (error) {
     console.log(error);
     res.sendStatus(500);

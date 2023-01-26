@@ -1,7 +1,6 @@
 import React from 'react';
 
 export default function OneCardPage({ card }) {
-    console.log(card.img)
   return (
     <div>
       <div className="card" style={{ width: '18rem' }}>
