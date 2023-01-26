@@ -4,6 +4,7 @@ import axios from 'axios';
 export default function SignUpPage() {
   const [error, setError] = useState({});
   const submitHandler = (e) => {
+    e.preventDefault();
     const data = Object.fromEntries(new FormData(e.target));
     axios.post('api/user/signup', data)
       .then(() => {
@@ -21,7 +22,7 @@ export default function SignUpPage() {
         </label>
         <label htmlFor="carsuser" className="form-label">
           Username
-          <input type="text" name="username" className="form-control" id="carsuser" />
+          <input type="text" name="name" className="form-control" id="carsuser" />
         </label>
         <label htmlFor="carspass" className="form-label">
           Password

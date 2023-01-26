@@ -3,6 +3,7 @@ import React from 'react';
 
 export default function LoginPage() {
   const submitHandler = (e) => {
+    e.preventDefault();
     const data = Object.fromEntries(new FormData(e.target));
     axios.post('api/user/signin', data)
       .then(() => {
@@ -18,7 +19,7 @@ export default function LoginPage() {
           Email address or Username
           <input type="text" name="emailOrUserName" className="form-control" id="carsemail" />
         </label>
-        <label htmlFor="carspass" className="form-label">
+        <label htmlFor="cardspass" className="form-label">
           Password
           <input type="password" name="pass" className="form-control" id="carspass" />
         </label>
