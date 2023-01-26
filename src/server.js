@@ -4,7 +4,8 @@ import session from 'express-session';
 import store from 'session-file-store';
 import path from 'path';
 import jsxRender from './utils/jsxRender';
-import renderRouter from './routs/renderRouter';
+import renderRouter from './routes/renderRouter';
+import apiCardRouter from './routes/apiCardRouter';
 // import apiUserRouter from './routs/apiUserRouter';
 // import apiCarRouter from './routs/apiCarRouter';
 
@@ -42,6 +43,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/', renderRouter);
+app.use('/api', apiCardRouter);
 // app.use('/api/user', apiUserRouter);
 // app.use('/api/car', apiCarRouter);
 
