@@ -14,20 +14,18 @@ module.exports = {
       user_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: {
-            tableName: 'Users',
-          },
+          model: 'Users',
           key: 'id',
         },
       },
       tea_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: {
-            tableName: 'Teas',
-          },
+          model: 'Teas',
           key: 'id',
         },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
       createdAt: {
         allowNull: false,

@@ -29,6 +29,11 @@
     "webpack-cli": "^5.0.1"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@mui/icons-material": "^5.11.11",
+    "@mui/material": "^5.11.11",
+    "@mui/styled-engine-sc": "^5.11.11",
     "axios": "^1.2.4",
     "bcrypt": "^5.1.0",
     "dotenv": "^16.0.3",
@@ -40,6 +45,7 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.7.0",
     "sequelize": "^6.28.0",
-    "session-file-store": "^1.5.0"
+    "session-file-store": "^1.5.0",
+    "styled-components": "^5.3.6"
   }
 }

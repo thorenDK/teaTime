@@ -12,7 +12,8 @@ module.exports = (sequelize, DataTypes) => {
     static associate({ Comment }) {
       this.hasMany(Comment, {
         foreignKey: 'tea_id',
-      });
+        onDelete: 'cascade',
+      }, { hooks: true });
     }
   }
   Tea.init({
@@ -21,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     coordinates_x: DataTypes.STRING,
     coordinates_y: DataTypes.STRING,
     img: DataTypes.STRING,
-    description: DataTypes.STRING,
+    description: DataTypes.TEXT,
   }, {
     sequelize,
     modelName: 'Tea',

@@ -1,10 +1,13 @@
 import express from 'express';
 import Layout from '../components/Layout';
+import { Tea } from '../../db/models';
 
 const renderRouter = express.Router();
 
 renderRouter.get('/', async (req, res) => {
-  res.render('Layout');
+  const tea = await Tea.findAll();
+  const initState = { tea };
+  res.render('Layout', initState);
 });
 renderRouter.get('/login', (req, res) => {
   res.render('Layout');

@@ -7,7 +7,8 @@ import jsxRender from './utils/jsxRender';
 import renderRouter from './routes/renderRouter';
 import apiCardRouter from './routes/apiCardRouter';
 import apiUserRouter from './routes/apiUserRouter';
-// import apiCarRouter from './routs/apiCarRouter';
+import apiCommentRouter from './routes/apiCommentsRouter';
+import { Tea } from '../db/models';
 
 require('dotenv').config();
 
@@ -45,6 +46,27 @@ app.use((req, res, next) => {
 app.use('/', renderRouter);
 app.use('/api', apiCardRouter);
 app.use('/api/user', apiUserRouter);
-// app.use('/api/car', apiCarRouter);
+app.use('/comments', apiCommentRouter);
+app.get('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const cards = await Tea.findOne({ where: { id } });
+    const initState = { cards };
+    res.render('Layout', initState);
+  } catch (error) {
+    console.log(error);
+  }
+});
 
-app.listen(PORT, () => console.log(`App has started on port ${PORT}`));
+app.get('/cardMap/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const cards = await Tea.findOne({ where: { id } });
+    const initState = { cards };
+    res.render('Layout', initState);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+app.listen(PORT, () => console.log('App has started on port: ', PORT));
